@@ -74,6 +74,7 @@
 
     gnomeExtensions.arcmenu
     
+    gnome-terminal 
     # Docker
     docker docker-compose
 
@@ -82,6 +83,7 @@
 
     # Système
     htop btop tree unzip zip file lsof strace
+
 
     # Shell
     zsh tmux fzf ripgrep bat eza
