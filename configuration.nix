@@ -84,7 +84,8 @@
     # Système
     htop btop tree unzip zip file lsof strace
 
-
+    gnomeExtensions.desktop-icons-ng-ding
+    
     # Shell
     zsh tmux fzf ripgrep bat eza
 
