@@ -86,6 +86,9 @@
 
     gnomeExtensions.desktop-icons-ng-ding
     
+    python3
+    python3Packages.pip
+
     # Shell
     zsh tmux fzf ripgrep bat eza
 
