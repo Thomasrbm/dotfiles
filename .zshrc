@@ -31,6 +31,8 @@ alias r='ranger-cd'
 
 alias bcat=batcat
 
+alias py=python3
+
 unalias rel 2>/dev/null
 rel() {
   source ~/.zshrc && echo "Zsh config reloaded"
@@ -113,3 +115,4 @@ ranger-cd() {
 }
 zle -N ranger-cd
 bindkey '^[r' ranger-cd
+export PATH="$HOME/.local/bin:$PATH"
