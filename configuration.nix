@@ -79,15 +79,19 @@
     docker docker-compose
 
     # Réseau
-    curl wget tcpdump nmap nettools
+    curl wget tcpdump nmap net-tools
 
     # Système
     htop btop tree unzip zip file lsof strace
 
     gnomeExtensions.desktop-icons-ng-ding
     
-    python3
     python3Packages.pip
+    (python3.withPackages (ps: with ps; [
+      requests
+      beautifulsoup4
+      lxml
+    ]))
 
     # Shell
     zsh tmux fzf ripgrep bat eza
