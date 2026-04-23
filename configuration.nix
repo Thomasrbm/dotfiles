@@ -86,11 +86,14 @@
 
     gnomeExtensions.desktop-icons-ng-ding
     
-    python3Packages.pip
     (python3.withPackages (ps: with ps; [
       requests
       beautifulsoup4
       lxml
+      numpy
+      scipy
+      matplotlib
+      pillow
     ]))
 
     # Shell
