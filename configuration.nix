@@ -94,6 +94,7 @@
       scipy
       matplotlib
       pillow
+      pandas
     ]))
 
     # Shell
