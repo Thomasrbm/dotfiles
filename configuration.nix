@@ -95,6 +95,9 @@
       matplotlib
       pillow
       pandas
+      stdenv.cc.cc
+      zlib
+      openssl
     ]))
 
     # Shell
