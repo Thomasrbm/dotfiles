@@ -52,13 +52,24 @@
   nixpkgs.config.allowUnfree = true;
 
   # nix-ld pour exécuter des binaires dynamiques génériques (Claude Code, etc.)
+  # nix-ld pour exécuter des binaires dynamiques génériques (Claude Code, etc.)
   programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
-      stdenv.cc.cc
+      stdenv.cc.cc.lib
       zlib
       openssl
       glibc
+      # utiles pour binaires précompilés courants
+      libGL
+      libxkbcommon
+      fontconfig
+      freetype
+      xorg.libX11
+      xorg.libXrandr
+      xorg.libXi
+      xorg.libXcursor
+      xorg.libxcb
     ];
   };
 
@@ -68,7 +79,6 @@
   # Packages
   environment.systemPackages = with pkgs; [
 
-    valgrind
     # Editeurs
     vscode vim nano gnome-tweaks
     # Dev
