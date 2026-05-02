@@ -67,6 +67,8 @@
   virtualisation.docker.enable = true;
   # Packages
   environment.systemPackages = with pkgs; [
+
+    valgrind
     # Editeurs
     vscode vim nano gnome-tweaks
     # Dev
