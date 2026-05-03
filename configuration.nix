@@ -89,6 +89,9 @@
     docker docker-compose
     # Réseau
     curl wget tcpdump nmap net-tools
+
+    (pkgs.writeShellScriptBin "pi" ''exec ${pkgs.inetutils}/bin/ping "$@"'')
+
     # Système
     htop btop tree unzip zip file lsof strace
     gnomeExtensions.desktop-icons-ng-ding
