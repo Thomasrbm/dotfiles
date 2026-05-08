@@ -83,7 +83,7 @@
     # Editeurs
     vscode vim nano gnome-tweaks
     # Dev
-    git gnumake cmake gcc gdb valgrind clang llvm
+    git gnumake cmake gcc gdb valgrind clang llvm nasm yasm
     gnomeExtensions.arcmenu
     gnome-terminal
     # Docker
