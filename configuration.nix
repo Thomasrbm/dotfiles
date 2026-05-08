@@ -78,7 +78,8 @@
   virtualisation.docker.enable = true;
   # Packages
   environment.systemPackages = with pkgs; [
-
+    pkgsi686Linux.glibc
+    steam-run
     # Editeurs
     vscode vim nano gnome-tweaks
     # Dev
