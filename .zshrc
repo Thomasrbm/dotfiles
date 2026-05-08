@@ -33,6 +33,8 @@ alias bcat=batcat
 
 alias py=python3
 
+alias sr=steam-run
+
 unalias rel 2>/dev/null
 rel() {
   source ~/.zshrc && echo "Zsh config reloaded"
