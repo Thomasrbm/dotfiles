@@ -50,8 +50,12 @@
   programs.zsh.enable = true;
   programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
-
-  # nix-ld pour exécuter des binaires dynamiques génériques (Claude Code, etc.)
+  # Documentation / man pages
+  documentation = {
+    enable = true;
+    man.enable = true;
+    dev.enable = true;
+  };
   # nix-ld pour exécuter des binaires dynamiques génériques (Claude Code, etc.)
   programs.nix-ld = {
     enable = true;
@@ -72,7 +76,6 @@
       xorg.libxcb
     ];
   };
-
   # SSH
   services.openssh = {
     enable = true;
@@ -82,7 +85,6 @@
     };
   };
   networking.firewall.allowedTCPPorts = [ 22 ];
-
   # Virtualisation
   virtualisation.virtualbox.guest.enable = true;
   virtualisation.docker.enable = true;
@@ -90,6 +92,9 @@
   environment.systemPackages = with pkgs; [
     pkgsi686Linux.glibc
     steam-run
+    # Man pages
+    man-pages
+    man-pages-posix
     # Editeurs
     vscode vim nano gnome-tweaks
     # Dev
@@ -100,13 +105,10 @@
     docker docker-compose
     # Réseau
     curl wget tcpdump nmap net-tools
-
     (pkgs.writeShellScriptBin "pi" ''exec ${pkgs.inetutils}/bin/ping "$@"'')
-
     # Système
     htop btop tree unzip zip file lsof strace
     gnomeExtensions.desktop-icons-ng-ding
-
     (python3.withPackages (ps: with ps; [
       requests
       beautifulsoup4
@@ -117,7 +119,6 @@
       pillow
       pandas
     ]))
-
     # Shell
     zsh tmux fzf ripgrep bat eza
     # GNOME
