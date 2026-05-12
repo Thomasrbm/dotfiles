@@ -90,6 +90,7 @@
   virtualisation.docker.enable = true;
   # Packages
   environment.systemPackages = with pkgs; [
+    libreoffice-fresh
     pkgsi686Linux.glibc
     steam-run
     # Man pages
