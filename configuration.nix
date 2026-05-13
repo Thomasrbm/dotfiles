@@ -90,6 +90,7 @@
   virtualisation.docker.enable = true;
   # Packages
   environment.systemPackages = with pkgs; [
+    obs-studio
     qemu
     grub2
     xorriso
