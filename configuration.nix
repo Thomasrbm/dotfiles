@@ -91,6 +91,11 @@
   # Packages
   environment.systemPackages = with pkgs; [
     obs-studio
+
+    ffmpeg-full   # ffmpeg avec tous les codecs
+    mpv 
+
+
     qemu
     grub2
     xorriso
