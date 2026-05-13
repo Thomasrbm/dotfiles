@@ -90,6 +90,10 @@
   virtualisation.docker.enable = true;
   # Packages
   environment.systemPackages = with pkgs; [
+    qemu
+    grub2
+    xorriso
+    binutils
     libreoffice-fresh
     pkgsi686Linux.glibc
     steam-run
