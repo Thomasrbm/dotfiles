@@ -5,9 +5,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelParams = [ "elevator=none" ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModprobeConfig = "options kvm_intel nested=1";
+
   # Réseau
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
+
   # Timezone / Locale
   time.timeZone = "Europe/Paris";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -22,14 +26,17 @@
     LC_TELEPHONE = "fr_FR.UTF-8";
     LC_TIME = "fr_FR.UTF-8";
   };
+
   # Display
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "virtualbox" ];
   services.xserver.xkb = { layout = "us"; variant = ""; };
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
+
   # GNOME extensions activées
   environment.gnome.excludePackages = [];
+
   # Son
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -39,23 +46,27 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
   # Utilisateur
   users.users.throbert = {
     isNormalUser = true;
     description = "throbert";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "kvm" ];
     shell = pkgs.zsh;
   };
+
   # Programmes
   programs.zsh.enable = true;
   programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
+
   # Documentation / man pages
   documentation = {
     enable = true;
     man.enable = true;
     dev.enable = true;
   };
+
   # nix-ld pour exécuter des binaires dynamiques génériques (Claude Code, etc.)
   programs.nix-ld = {
     enable = true;
@@ -76,6 +87,7 @@
       xorg.libxcb
     ];
   };
+
   # SSH
   services.openssh = {
     enable = true;
@@ -85,18 +97,29 @@
     };
   };
   networking.firewall.allowedTCPPorts = [ 22 ];
+
   # Virtualisation
   virtualisation.virtualbox.guest.enable = true;
   virtualisation.docker.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+    };
+  };
+  networking.firewall.trustedInterfaces = [ "virbr0" ];
+
   # Packages
   environment.systemPackages = with pkgs; [
+    vagrant
+    virt-manager      # GUI optionnelle
+    qemu_kvm
+    libvirt
     obs-studio
-
     ffmpeg-full   # ffmpeg avec tous les codecs
-    mpv 
-
-
-    qemu
+    mpv
     grub2
     xorriso
     binutils
@@ -135,5 +158,6 @@
     # GNOME
     gnomeExtensions.dash-to-dock
   ];
+
   system.stateVersion = "25.11";
 }
