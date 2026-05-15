@@ -144,6 +144,7 @@
     htop btop tree unzip zip file lsof strace
     gnomeExtensions.desktop-icons-ng-ding
     (python3.withPackages (ps: with ps; [
+      readline iputils
       requests
       beautifulsoup4
       lxml
