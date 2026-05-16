@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
+
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -35,7 +36,7 @@
   services.desktopManager.gnome.enable = true;
 
   # GNOME extensions activées
-  environment.gnome.excludePackages = [];
+  environment.gnome.excludePackages = [ ];
 
   # Son
   services.pulseaudio.enable = false;
@@ -51,7 +52,7 @@
   users.users.throbert = {
     isNormalUser = true;
     description = "throbert";
-    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "kvm" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;
   };
 
@@ -75,7 +76,6 @@
       zlib
       openssl
       glibc
-      # utiles pour binaires précompilés courants
       libGL
       libxkbcommon
       fontconfig
@@ -101,24 +101,13 @@
   # Virtualisation
   virtualisation.virtualbox.guest.enable = true;
   virtualisation.docker.enable = true;
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu = {
-      package = pkgs.qemu_kvm;
-      runAsRoot = true;
-      swtpm.enable = true;
-    };
-  };
-  networking.firewall.trustedInterfaces = [ "virbr0" ];
 
   # Packages
   environment.systemPackages = with pkgs; [
+    nodejs
     vagrant
-    virt-manager      # GUI optionnelle
-    qemu_kvm
-    libvirt
     obs-studio
-    ffmpeg-full   # ffmpeg avec tous les codecs
+    ffmpeg-full
     mpv
     grub2
     xorriso
@@ -126,27 +115,58 @@
     libreoffice-fresh
     pkgsi686Linux.glibc
     steam-run
+
     # Man pages
     man-pages
     man-pages-posix
+
     # Editeurs
-    vscode vim nano gnome-tweaks
+    vscode
+    vim
+    nano
+    gnome-tweaks
+
     # Dev
-    git gnumake cmake gcc gdb valgrind clang llvm nasm yasm
+    git
+    gnumake
+    cmake
+    gcc
+    gdb
+    valgrind
+    clang
+    llvm
+    nasm
+    yasm
     gnomeExtensions.arcmenu
     gnome-terminal
+
     # Docker
-    docker docker-compose
+    docker
+    docker-compose
+
     # Réseau
-    curl wget tcpdump nmap net-tools
+    curl
+    wget
+    tcpdump
+    nmap
+    net-tools
     (pkgs.writeShellScriptBin "pi" ''exec ${pkgs.inetutils}/bin/ping "$@"'')
+
     # Système
-    htop btop tree unzip zip file lsof strace
+    htop
+    btop
+    tree
+    unzip
+    zip
+    file
+    lsof
+    strace
     gnomeExtensions.desktop-icons-ng-ding
+
     (python3.withPackages (ps: with ps; [
-      readline iputils
+      readline
+      iputils
       requests
-      nodejs
       beautifulsoup4
       lxml
       numpy
@@ -155,8 +175,15 @@
       pillow
       pandas
     ]))
+
     # Shell
-    zsh tmux fzf ripgrep bat eza
+    zsh
+    tmux
+    fzf
+    ripgrep
+    bat
+    eza
+
     # GNOME
     gnomeExtensions.dash-to-dock
   ];
