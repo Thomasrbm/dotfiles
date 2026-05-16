@@ -146,6 +146,7 @@
     (python3.withPackages (ps: with ps; [
       readline iputils
       requests
+      nodejs
       beautifulsoup4
       lxml
       numpy
