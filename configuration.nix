@@ -102,12 +102,15 @@
   virtualisation.virtualbox.guest.enable = true;
   virtualisation.docker.enable = true;
   services.gns3-server = {
-  enable = true;
-  auth.enable = false;
-  ubridge.enable = true;
-  dynamips.enable = true;
-  vpcs.enable = true;
+    enable = true;
+    auth.enable = false;
+    ubridge.enable = true;
+    dynamips.enable = true;
+    vpcs.enable = true;
   };
+
+  systemd.services.gns3-server.serviceConfig.ExecStart = pkgs.lib.mkForce
+    "${pkgs.gns3-server}/bin/gns3server --config=/etc/gns3/gns3_server.conf --log=/var/log/gns3/server.log --pid=/run/gns3/server.pid --local";
 
   # Packages
   environment.systemPackages = with pkgs; [
