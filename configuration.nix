@@ -52,7 +52,7 @@
   users.users.throbert = {
     isNormalUser = true;
     description = "throbert";
-    extraGroups = [ "networkmanager" "wheel" "docker" "ubridge"];
+    extraGroups = [ "networkmanager" "wheel" "docker" "ubridge" "gns3"];
     shell = pkgs.zsh;
   };
 
