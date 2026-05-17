@@ -52,7 +52,7 @@
   users.users.throbert = {
     isNormalUser = true;
     description = "throbert";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "ubridge"];
     shell = pkgs.zsh;
   };
 
@@ -101,9 +101,19 @@
   # Virtualisation
   virtualisation.virtualbox.guest.enable = true;
   virtualisation.docker.enable = true;
+  services.gns3-server = {
+      enable = true;
+      ubridge.enable = true;
+      dynamips.enable = true;
+      vpcs.enable = true;
+    };
+
 
   # Packages
   environment.systemPackages = with pkgs; [
+
+    gns3-gui gns3-server
+
     nodejs
     vagrant
     obs-studio
