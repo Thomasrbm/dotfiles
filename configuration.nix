@@ -102,12 +102,12 @@
   virtualisation.virtualbox.guest.enable = true;
   virtualisation.docker.enable = true;
   services.gns3-server = {
-      enable = true;
-      ubridge.enable = true;
-      dynamips.enable = true;
-      vpcs.enable = true;
-    };
-
+  enable = true;
+  auth.enable = false;
+  ubridge.enable = true;
+  dynamips.enable = true;
+  vpcs.enable = true;
+  };
 
   # Packages
   environment.systemPackages = with pkgs; [
