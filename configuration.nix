@@ -6,8 +6,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelParams = [ "elevator=none" ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModprobeConfig = "options kvm_intel nested=1";
 
   # Réseau
   networking.hostName = "nixos";
@@ -35,12 +33,9 @@
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
 
-  # GNOME extensions activées
-  environment.gnome.excludePackages = [ ];
-
   # Son
-  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -52,7 +47,7 @@
   users.users.throbert = {
     isNormalUser = true;
     description = "throbert";
-    extraGroups = [ "networkmanager" "wheel" "docker" "ubridge" "gns3"];
+    extraGroups = [ "networkmanager" "wheel" "docker" "ubridge" "gns3" ];
     shell = pkgs.zsh;
   };
 
@@ -101,6 +96,7 @@
   # Virtualisation
   virtualisation.virtualbox.guest.enable = true;
   virtualisation.docker.enable = true;
+
   services.gns3-server = {
     enable = true;
     auth.enable = false;
@@ -108,15 +104,12 @@
     dynamips.enable = true;
     vpcs.enable = true;
   };
-
   systemd.services.gns3-server.serviceConfig.ExecStart = pkgs.lib.mkForce
     "${pkgs.gns3-server}/bin/gns3server --config=/etc/gns3/gns3_server.conf --log=/var/log/gns3/server.log --pid=/run/gns3/server.pid --local";
 
   # Packages
   environment.systemPackages = with pkgs; [
-
     gns3-gui gns3-server
-
     nodejs
     pnpm
     vagrant
@@ -151,7 +144,6 @@
     llvm
     nasm
     yasm
-    gnomeExtensions.arcmenu
     gnome-terminal
 
     # Docker
@@ -175,7 +167,6 @@
     file
     lsof
     strace
-    gnomeExtensions.desktop-icons-ng-ding
 
     (python3.withPackages (ps: with ps; [
       readline
@@ -198,8 +189,10 @@
     bat
     eza
 
-    # GNOME
+    # GNOME extensions
+    gnomeExtensions.arcmenu
     gnomeExtensions.dash-to-dock
+    gnomeExtensions.desktop-icons-ng-ding
   ];
 
   system.stateVersion = "25.11";
