@@ -118,6 +118,7 @@
     gns3-gui gns3-server
 
     nodejs
+    pnpm
     vagrant
     obs-studio
     ffmpeg-full
