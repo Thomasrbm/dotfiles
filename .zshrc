@@ -35,6 +35,10 @@ alias py=python3
 
 alias sr=steam-run
 
+# --- SSH Shortcuts ---
+alias oneleague="ssh root@163.172.141.178"
+alias hostinger="ssh root@46.202.171.191"
+
 unalias rel 2>/dev/null
 rel() {
   source ~/.zshrc && echo "Zsh config reloaded"
