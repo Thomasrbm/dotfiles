@@ -33,6 +33,8 @@ alias bcat=batcat
 
 alias py=python3
 
+
+alias cls=clear
 alias sr=steam-run
 
 # --- SSH Shortcuts ---
